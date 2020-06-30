@@ -19,10 +19,10 @@ exports.checkID = (req, res, next, val) => {
     next();
 };
 
-exports.checkBody = (req, res, next, val) => {
+exports.checkBody = (req, res, next) => {
     console.log(`tour route param is ${req.body}`);
 
-    if (req.body.name && req.body.price) {
+    if (!req.body.name || !req.body.price) {
         return res.status(404).json({
             status: 'failed',
             data: {
