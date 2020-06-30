@@ -1,22 +1,23 @@
 {
-  "name": "nators",
-  "version": "1.0.0",
-  "description": "learning node express mongoDB",
-  "main": "app.JS",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/joj59/nodejs.git"
-  },
-  "author": "me",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/joj59/nodejs/issues"
-  },
-  "homepage": "https://github.com/joj59/nodejs#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+    "name": "nators",
+    "version": "1.0.0",
+    "description": "learning node express mongoDB",
+    "main": "app.JS",
+    "scripts": {
+        "start": "nodemon server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/joj59/nodejs.git"
+    },
+    "author": "me",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/joj59/nodejs/issues"
+    },
+    "homepage": "https://github.com/joj59/nodejs#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "morgan": "^1.10.0"
+    }
 }
