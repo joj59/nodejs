@@ -1,37 +1,41 @@
 {
-    "name": "nators",
-    "version": "1.0.0",
-    "description": "learning node express mongoDB",
-    "main": "app.JS",
-    "scripts": {
-        "start:dev": "nodemon server.js",
-        "start:prod": "SET NODE_ENV=production && nodemon server.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/joj59/nodejs.git"
-    },
-    "author": "me",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/joj59/nodejs/issues"
-    },
-    "homepage": "https://github.com/joj59/nodejs#readme",
-    "dependencies": {
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "morgan": "^1.10.0"
-    },
-    "devDependencies": {
-        "eslint": "^7.3.1",
-        "eslint-config-airbnb": "^18.2.0",
-        "eslint-config-prettier": "^6.11.0",
-        "eslint-plugin-import": "^2.22.0",
-        "eslint-plugin-jsx-a11y": "^6.3.1",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-prettier": "^3.1.4",
-        "eslint-plugin-react": "^7.20.2",
-        "eslint-plugin-react-hooks": "^4.0.5",
-        "prettier": "^2.0.5"
-    }
+  "name": "nators",
+  "version": "1.0.0",
+  "description": "learning node express mongoDB",
+  "main": "app.JS",
+  "scripts": {
+    "start:dev": "nodemon server.js",
+    "start:prod": "SET NODE_ENV=production && nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joj59/nodejs.git"
+  },
+  "author": "me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joj59/nodejs/issues"
+  },
+  "homepage": "https://github.com/joj59/nodejs#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.20",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.2",
+    "eslint-plugin-react-hooks": "^4.0.5",
+    "prettier": "^2.0.5"
+  },
+  "engines": {
+    "node": ">10"
+  }
 }
