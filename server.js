@@ -1,6 +1,12 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
+process.on('uncaughtException', (error) => {
+  console.log('UNCAUGHT EXCEPTION SHUTTING DOWN SERVER.....');
+  console.log(error);
+  process.exit(1);
+});
+
 dotenv.config({ path: './config.env' });
 const app = require('./app');
 
@@ -23,6 +29,14 @@ mongoose
     console.log('DB connection established');
   });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`app running on port no ${port}`);
+});
+
+process.on('unhandledRejection', (error) => {
+  console.log('UNHANDLED REJECTION SHUTTING DOWN SERVER.....');
+  console.log(error);
+  server.close(() => {
+    process.exit(1);
+  });
 });
