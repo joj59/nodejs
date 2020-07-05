@@ -1,63 +1,27 @@
 const User = require('../Models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
+const handlerFactory = require('./handlerFactory');
 
-const filterObj = (obj, ...allowedFields) => {
-  const newObj = {};
-  Object.keys(obj).forEach((el) => {
-    if (allowedFields.includes(el)) {
-      newObj[el] = obj[el];
-    }
-  });
-  return newObj;
-};
-
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
-
-  res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: {
-      users,
-    },
-  });
-});
+exports.getAllUsers = handlerFactory.getAll(User);
+exports.getUser = handlerFactory.getOne(User);
+exports.editUser = handlerFactory.updateOne(User);
+exports.deleteUser = handlerFactory.deleteOne(User);
 
 exports.addUser = (req, res) => {
   res.status(500).json({
     status: 'error',
     data: {
-      message: 'route not handled yet!',
+      message: 'route not handled yet! please use /signup route instead',
     },
   });
 };
 
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    data: {
-      message: 'route not handled yet!',
-    },
-  });
-};
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  console.log(req.params.id);
 
-exports.editUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    data: {
-      message: 'route not handled yet!',
-    },
-  });
-};
-
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    data: {
-      message: 'route not handled yet!',
-    },
-  });
+  next();
 };
 
 exports.updateMe = catchAsync(async (req, res, next) => {
@@ -69,6 +33,16 @@ exports.updateMe = catchAsync(async (req, res, next) => {
       )
     );
   }
+
+  const filterObj = (obj, ...allowedFields) => {
+    const newObj = {};
+    Object.keys(obj).forEach((el) => {
+      if (allowedFields.includes(el)) {
+        newObj[el] = obj[el];
+      }
+    });
+    return newObj;
+  };
 
   const filteredBody = filterObj(req.body, 'name', 'email');
 
@@ -86,7 +60,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+  await User.findByIdAndUpdate(req.user.id, {
     active: false,
   });
 

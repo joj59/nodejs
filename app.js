@@ -7,6 +7,7 @@ const xssClean = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const tourRouter = require('./routes/tourRoutes');
 const usersRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 const AppError = require('./utils/AppError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -49,6 +50,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Cant find requested URL (${req.originalUrl})`, 404));
