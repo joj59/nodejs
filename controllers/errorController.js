@@ -21,28 +21,49 @@ const handleValidationErrorDB = (error) => {
   return new AppError(message, 404);
 };
 
-const sendErrorDev = (error, res) => {
-  res.status(error.statusCode).json({
-    status: error.status,
-    error,
-    message: error.message,
-    stack: error.stack,
+const sendErrorDev = (error, req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
+    return res.status(error.statusCode).json({
+      status: error.status,
+      error,
+      message: error.message,
+      stack: error.stack,
+    });
+  }
+  console.error('ERROR', error);
+  return res.status(error.statusCode).render('error', {
+    title: 'Something went wrong',
+    msg: error.message,
   });
 };
 
-const sendErrorProd = (error, res) => {
-  if (error.isOperational) {
-    res.status(error.statusCode).json({
-      status: error.status,
-      message: error.message,
-    });
-  } else {
+const sendErrorProd = (error, req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
+    if (error.isOperational) {
+      return res.status(error.statusCode).json({
+        status: error.status,
+        message: error.message,
+      });
+    }
     console.error('ERROR', error);
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'something went wrong but im not going to tell you what',
     });
   }
+
+  if (error.isOperational) {
+    return res.status(error.statusCode).render('error', {
+      title: 'Something went wrong',
+      msg: error.message,
+    });
+  }
+
+  console.error('ERROR', error);
+  return res.status(error.statusCode).render('error', {
+    title: 'Something went wrong',
+    msg: 'Please try again later',
+  });
 };
 
 module.exports = (error, req, res, next) => {
@@ -50,9 +71,10 @@ module.exports = (error, req, res, next) => {
   error.status = error.status || 'error';
 
   if (process.env.NODE_ENV === 'development') {
-    sendErrorDev(error, res);
+    sendErrorDev(error, req, res);
   } else if (process.env.NODE_ENV === 'production') {
     let err = error;
+    err.message = error.message;
     const errorName = JSON.stringify(error.name);
     if (errorName === '"CastError"') err = handleCaseErrorDB(error);
 
@@ -64,7 +86,7 @@ module.exports = (error, req, res, next) => {
 
     if (error.name === 'TokenExpiredError') err = handleJWTTokenExpiredError();
 
-    sendErrorProd(err, res);
+    sendErrorProd(err, req, res);
   }
   console.log(process.env.NODE_ENV);
   next();
