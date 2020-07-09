@@ -17,7 +17,7 @@ exports.webhookCheckout = (req, res, next) => {
 
   let event;
   try {
-    event = stripe.webhooks.constuctEvents(
+    event = stripe.webhooks.constructEvents(
       req.body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
@@ -69,12 +69,3 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     session,
   });
 });
-
-// exports.createBookingCheckout = catchAsync(async (req, res, next) => {
-//   const { tour, user, price } = req.query;
-
-//   if (!tour && !user && !price) return next();
-
-//   await Booking.create({ tour, user, price });
-//   res.redirect(req.originalUrl.split('?')[0]);
-// });
