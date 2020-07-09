@@ -8,6 +8,7 @@ const xssClean = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const tourRouter = require('./routes/tourRoutes');
 const usersRouter = require('./routes/userRoutes');
@@ -23,6 +24,10 @@ app.enable('trust proxy');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'Views'));
+
+app.use(cors());
+
+app.options('*', cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
