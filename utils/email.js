@@ -44,9 +44,6 @@ module.exports = class Email {
       text: htmlToText.fromString(html),
     };
 
-    console.log(this.from);
-    //   await transporter.sendMail(mailOption);
-
     await this.newTransport().sendMail(mailOption);
   }
 

@@ -88,6 +88,5 @@ module.exports = (error, req, res, next) => {
 
     sendErrorProd(err, req, res);
   }
-  console.log(process.env.NODE_ENV);
   next();
 };

@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xssClean = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const tourRouter = require('./routes/tourRoutes');
 const usersRouter = require('./routes/userRoutes');
@@ -55,6 +56,8 @@ app.use(
     ],
   })
 );
+
+app.use(compression());
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

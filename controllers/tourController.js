@@ -52,7 +52,6 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
       req.body.images.push(filename);
     })
   );
-  console.log(req.files);
 
   next();
 });
@@ -85,7 +84,6 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
       data: tours,
     },
   });
-  console.log(distance, latlng, unit);
 });
 
 exports.getDistances = catchAsync(async (req, res, next) => {
