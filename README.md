@@ -13,4 +13,4 @@ heroku url: mighty-sea-25893
 
 
 
-All this was part of a nodejs course by Jonas Schmedtmann
+(nodejs course by Jonas Schmedtmann)
