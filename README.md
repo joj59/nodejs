@@ -9,7 +9,7 @@ Pass: test1234
 
 
 
-heroku url: mighty-sea-25893
+heroku url: http://mighty-sea-25893.herokuapp.com/
 
 
 
