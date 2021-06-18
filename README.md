@@ -16,6 +16,8 @@ heroku url: http://mighty-sea-25893.herokuapp.com/
 (nodejs course by Jonas Schmedtmann)
 
 
+Pages
+
 ![image](https://user-images.githubusercontent.com/40954431/122557436-b21c2d80-d034-11eb-9e6a-3bbe7bb855b3.png)
 
 
